@@ -1,5 +1,5 @@
 # Headscale v0.23+ 完整配置範本
-server_url: https://your-domain.zeabur.app # 👈 記得改這行
+server_url: https://alex-hs.zeabur.app # 👈 記得改這行
 listen_addr: 0.0.0.0:8080
 metrics_listen_addr: 0.0.0.0:9090
 
