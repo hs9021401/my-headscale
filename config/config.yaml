@@ -1,27 +1,25 @@
-# Headscale 核心設定檔 - Zeabur 優化版
----
-# ⚠️ 重要：部署後請將此 URL 改為你在 Zeabur 產生的 https 域名
-server_url: https://alex-hs.zeabur.app
-
-# 監聽設定 (Zeabur 內部通訊用)
+# Headscale v0.23+ 完整配置範本
+server_url: https://your-domain.zeabur.app # 👈 記得改這行
 listen_addr: 0.0.0.0:8080
 metrics_listen_addr: 0.0.0.0:9090
 
-# 資料庫設定 (使用 SQLite)
-db_type: sqlite3
-db_path: /var/lib/headscale/db.sqlite
+# 新版資料庫結構
+database:
+  type: sqlite3
+  sqlite:
+    path: /var/lib/headscale/db.sqlite
 
-# 密鑰與安全 (路徑需與 docker-compose 掛載一致)
+# 密鑰路徑
 private_key_path: /var/lib/headscale/private.key
 noise:
   private_key_path: /var/lib/headscale/noise_private.key
 
-# 節點 IP 分配範圍 (預設即可)
+# IP 分配
 prefixes:
   v4: 100.64.0.0/10
   v6: fd7a:115c:a1e0::/48
 
-# DNS 與網域設定
+# DERP 中繼伺服器
 derp:
   server:
     enabled: true
@@ -29,15 +27,19 @@ derp:
     region_code: "headscale"
     region_name: "Headscale Embedded DERP"
     stun_listen_addr: "0.0.0.0:3478"
+  urls:
+    - https://controlplane.tailscale.com/derpmap/default
 
-# 下面這些通常不需要改，除非你有特殊需求
-dns_config:
+# 剛剛報錯的 DNS 區塊
+dns:
   magic_dns: true
   base_domain: headscale.internal
   nameservers:
-    - 1.1.1.1
-    - 8.8.8.8
+    global:
+      - 1.1.1.1
+      - 8.8.8.8
+  override_local_dns: true
 
-# 其他安全設定
+# 其他系統設定
 log:
   level: info
