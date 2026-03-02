@@ -1,7 +1,7 @@
 # Headscale 核心設定檔 - Zeabur 優化版
 ---
 # ⚠️ 重要：部署後請將此 URL 改為你在 Zeabur 產生的 https 域名
-server_url: https://your-headscale.zeabur.app
+server_url: https://alex-hs.zeabur.app
 
 # 監聽設定 (Zeabur 內部通訊用)
 listen_addr: 0.0.0.0:8080
